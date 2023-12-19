@@ -18,6 +18,24 @@ model User {
   status Boolean
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
+  pets Pet[]
 
   @@map("users")
+}
+
+model Pet {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  picture String
+  name String
+  specie String
+  weight Float
+  age Int
+  whatsapp  String
+  description String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  ownerId String @map("owner_id") @db.ObjectId
+  owner User @relation(fields: [ownerId], references: [id])
+
+  @@map("pets")
 }
