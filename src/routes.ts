@@ -5,6 +5,7 @@ import {
   FastifyRequest,
 } from "fastify";
 import { CreateUserController } from "./controllers/user/CreateUserController";
+import { AuthUserController } from "./controllers/user/AuthUserController";
 
 export async function routes(
   fastify: FastifyInstance,
@@ -17,9 +18,15 @@ export async function routes(
     }
   );
   fastify.post(
-    "/user",
+    "/register",
     async (request: FastifyRequest, reply: FastifyReply) => {
       return new CreateUserController().handle(request, reply);
+    }
+  );
+  fastify.post(
+    "/login",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      return new AuthUserController().handle(request, reply);
     }
   );
 }
