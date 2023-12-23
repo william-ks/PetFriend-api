@@ -15,7 +15,6 @@ model User {
   name String
   email String
   password String
-  status Boolean
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
   pets Pet[]
