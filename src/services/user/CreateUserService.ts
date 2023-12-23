@@ -30,13 +30,11 @@ export class CreateUserService {
         name,
         email,
         password: passwordHash,
-        status: true,
       },
       select: {
         id: true,
         name: true,
         email: true,
-        status: true,
       },
     });
 

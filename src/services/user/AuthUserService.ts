@@ -42,7 +42,6 @@ export class AuthUserService {
       name: user?.name,
       email: user?.email,
       password: user?.password,
-      status: user?.status,
       token: token,
     };
   }
