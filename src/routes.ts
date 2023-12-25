@@ -9,6 +9,7 @@ import { AuthUserController } from "./controllers/user/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { DetailPetController } from "./controllers/pet/DetailPetController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
+import { CreatePetController } from "./controllers/pet/CreatePetController";
 
 export async function routes(
   fastify: FastifyInstance,
@@ -40,11 +41,19 @@ export async function routes(
       return new AuthUserController().handle(request, reply);
     }
   );
+  //Pet routes
   fastify.get(
     "/pet/detail",
     { preHandler: isAuthenticated },
     async (request: FastifyRequest, reply: FastifyReply) => {
       return new DetailPetController().handle(request, reply);
+    }
+  );
+  fastify.post(
+    "/pet/new",
+    { preHandler: isAuthenticated },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      return new CreatePetController().handle(request, reply);
     }
   );
 }
