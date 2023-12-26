@@ -2,7 +2,7 @@ import express, { Router, Request, Response } from "express";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
-import { DetailPetController } from "./controllers/pet/DetailPetController";
+import { DetailPetsController } from "./controllers/pet/DetailPetsController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 import { CreatePetController } from "./controllers/pet/CreatePetController";
 
@@ -18,5 +18,5 @@ router.post("/login", new AuthUserController().handle);
 router.get("/me", isAuthenticated, new DetailUserController().handle);
 
 //Pet routes
-router.get("/pet/detail", isAuthenticated, new DetailPetController().handle);
+router.get("/pets", new DetailPetsController().handle);
 router.post("/pet/new", isAuthenticated, new CreatePetController().handle);

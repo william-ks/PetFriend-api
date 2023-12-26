@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
-import { DetailPetService } from "../../services/pet/DetailPetService";
+import { DetailPetsService } from "../../services/pet/DetailPetsService";
 
-export class DetailPetController {
+export class DetailPetsController {
   async handle(request: Request, response: Response) {
-    const user_id = request.user_id;
-
-    const detailPetService = new DetailPetService();
+    const detailPetService = new DetailPetsService();
 
     const detailPet = await detailPetService.execute();
 
