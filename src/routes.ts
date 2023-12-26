@@ -1,9 +1,4 @@
-import {
-  FastifyInstance,
-  FastifyPluginOptions,
-  FastifyReply,
-  FastifyRequest,
-} from "fastify";
+import express, { Router, Request, Response } from "express";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
@@ -11,49 +6,17 @@ import { DetailPetController } from "./controllers/pet/DetailPetController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 import { CreatePetController } from "./controllers/pet/CreatePetController";
 
-export async function routes(
-  fastify: FastifyInstance,
-  options: FastifyPluginOptions
-) {
-  fastify.get(
-    "/teste",
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      return { ok: true };
-    }
-  );
-  //User routes
-  fastify.get(
-    "/me",
-    { preHandler: isAuthenticated },
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      return new DetailUserController().handle(request, reply);
-    }
-  );
-  fastify.post(
-    "/register",
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      return new CreateUserController().handle(request, reply);
-    }
-  );
-  fastify.post(
-    "/login",
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      return new AuthUserController().handle(request, reply);
-    }
-  );
-  //Pet routes
-  fastify.get(
-    "/pet/detail",
-    { preHandler: isAuthenticated },
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      return new DetailPetController().handle(request, reply);
-    }
-  );
-  fastify.post(
-    "/pet/new",
-    { preHandler: isAuthenticated },
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      return new CreatePetController().handle(request, reply);
-    }
-  );
-}
+export const router = Router();
+
+router.get("/", async (request: Request, response: Response) => {
+  return response.json({ ok: true });
+});
+
+//User routes
+router.post("/register", new CreateUserController().handle);
+router.post("/login", new AuthUserController().handle);
+router.get("/me", isAuthenticated, new DetailUserController().handle);
+
+//Pet routes
+router.get("/pet/detail", isAuthenticated, new DetailPetController().handle);
+router.post("/pet/new", isAuthenticated, new CreatePetController().handle);

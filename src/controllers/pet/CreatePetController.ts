@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import { Request, Response } from "express";
 import { CreatePetService } from "../../services/pet/CreatePetService";
 
 type RequestBody = {
@@ -12,7 +12,7 @@ type RequestBody = {
 };
 
 export class CreatePetController {
-  async handle(request: FastifyRequest, reply: FastifyReply) {
+  async handle(request: Request, response: Response) {
     // @ts-ignore
     const user_id = request.user_id;
     const { picture, name, specie, weight, age, description, whatsapp } =
@@ -31,6 +31,6 @@ export class CreatePetController {
       whatsapp,
     });
 
-    return reply.send(pet);
+    return response.json(pet);
   }
 }

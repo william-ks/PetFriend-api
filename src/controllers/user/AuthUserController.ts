@@ -1,4 +1,4 @@
-import { FastifyRequest, FastifyReply } from "fastify";
+import { Request, Response } from "express";
 import { AuthUserService } from "../../services/user/AuthUserService";
 
 type RequestBody = {
@@ -7,13 +7,13 @@ type RequestBody = {
 };
 
 export class AuthUserController {
-  async handle(request: FastifyRequest, reply: FastifyReply) {
+  async handle(request: Request, response: Response) {
     const { email, password } = request.body as RequestBody;
 
     const authUserService = new AuthUserService();
 
     const session = await authUserService.execute({ email, password });
 
-    return reply.send(session);
+    return response.json(session);
   }
 }

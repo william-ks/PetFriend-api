@@ -1,18 +1,19 @@
-import { FastifyRequest, FastifyReply } from "fastify";
+import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 interface Payload {
   sub: string;
 }
 
-export async function isAuthenticated(
-  request: FastifyRequest,
-  reply: FastifyReply
+export function isAuthenticated(
+  request: Request,
+  response: Response,
+  next: NextFunction
 ) {
   const authToken = request.headers.authorization;
 
   if (!authToken) {
-    return reply.status(401).send();
+    return response.status(401).end();
   }
 
   const [, token] = authToken.split(" ");
@@ -20,11 +21,12 @@ export async function isAuthenticated(
   try {
     const { sub } = verify(token, process.env.JWT_SECRET) as Payload;
 
-    // @ts-ignore
     request.user_id = sub;
 
-    return;
+    return next();
   } catch (error) {
-    return reply.status(401).send();
+    return response.status(401).end();
   }
+
+  console.log(authToken);
 }

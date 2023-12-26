@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import { Request, Response } from "express";
 import { CreateUserService } from "../../services/user/CreateUserService";
 
 type RequestBody = {
@@ -8,12 +8,12 @@ type RequestBody = {
 };
 
 export class CreateUserController {
-  async handle(request: FastifyRequest, reply: FastifyReply) {
+  async handle(request: Request, response: Response) {
     const { name, email, password } = request.body as RequestBody;
     const userService = new CreateUserService();
 
     const user = await userService.execute({ name, email, password });
 
-    reply.send(user);
+    response.json(user);
   }
 }

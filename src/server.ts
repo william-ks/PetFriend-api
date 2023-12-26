@@ -1,25 +1,22 @@
-import Fastify from "fastify";
-import cors from "@fastify/cors";
-import { routes } from "./routes";
+import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
+import { router } from "./routes";
 
-const app = Fastify({ logger: true });
+const app = express();
 
-app.setErrorHandler((error, _, reply) => {
-  reply.code(400).send({ message: error.message });
+app.use(cors());
+
+app.use(router);
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  if (err instanceof Error) {
+    return res.status(400).json({ error: err.message });
+  }
+
+  return res.status(500).json({
+    status: "error",
+    message: "Internal server error.",
+  });
 });
 
-const start = async () => {
-  await app.register(cors);
-  await app.register(routes);
-
-  try {
-    await app.listen({
-      port: Number(process.env.PORT) || 3333,
-      host: "0.0.0.0",
-    });
-  } catch (error) {
-    process.exit(1);
-  }
-};
-
-start();
+app.listen(process.env.PORT || 3333, () => console.log("Servidor online"));
