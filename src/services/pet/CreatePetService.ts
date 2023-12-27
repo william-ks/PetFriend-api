@@ -26,10 +26,6 @@ export class CreatePetService {
       throw new Error("Envio inválido");
     }
 
-    const myPets = await prismaClient.pet.findFirst({
-      where: { ownerId: user_id },
-    });
-
     const pet = await prismaClient.pet.create({
       data: {
         picture,
