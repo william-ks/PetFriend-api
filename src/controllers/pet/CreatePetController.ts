@@ -3,7 +3,8 @@ import { CreatePetService } from "../../services/pet/CreatePetService";
 
 export class CreatePetController {
   async handle(request: Request, response: Response) {
-    const { name, specie, weight, age, description, whatsapp } = request.body;
+    const { name, specie, weight, age, description, whatsapp, city } =
+      request.body;
     const { originalname, filename: picture } = request.file;
     const user_id = request.user_id;
 
@@ -20,6 +21,7 @@ export class CreatePetController {
         age: Number(age),
         description,
         whatsapp,
+        city,
       });
       return response.json(pet);
     }

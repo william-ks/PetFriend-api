@@ -9,6 +9,7 @@ interface PetProcedure {
   age: number;
   description: string;
   whatsapp: string;
+  city: string;
 }
 
 export class CreatePetService {
@@ -21,6 +22,7 @@ export class CreatePetService {
     age,
     description,
     whatsapp,
+    city,
   }: PetProcedure) {
     if (!picture || !name || !specie) {
       throw new Error("Envio inválido");
@@ -35,6 +37,7 @@ export class CreatePetService {
         age,
         description,
         whatsapp,
+        city,
         ownerId: user_id,
       },
     });
