@@ -7,6 +7,7 @@ import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { DetailPetsController } from "./controllers/pet/DetailPetsController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 import { CreatePetController } from "./controllers/pet/CreatePetController";
+import { GetPetsController } from "./controllers/pet/GetPetsController";
 
 export const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -22,6 +23,7 @@ router.get("/me", isAuthenticated, new DetailUserController().handle);
 
 //Pet routes
 router.get("/pets", new DetailPetsController().handle);
+router.get("/mypets", isAuthenticated, new GetPetsController().handle);
 router.post(
   "/pet/new",
   isAuthenticated,
