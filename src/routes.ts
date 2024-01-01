@@ -8,6 +8,7 @@ import { DetailPetsController } from "./controllers/pet/DetailPetsController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 import { CreatePetController } from "./controllers/pet/CreatePetController";
 import { GetPetsController } from "./controllers/pet/GetPetsController";
+import { DeletePetController } from "./controllers/pet/DeletePetController";
 
 export const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -30,3 +31,4 @@ router.post(
   upload.single("file"),
   new CreatePetController().handle
 );
+router.delete("/delete", isAuthenticated, new DeletePetController().handle);
