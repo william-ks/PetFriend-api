@@ -3,10 +3,10 @@ import { DetailPetsService } from "../../services/pet/DetailPetsService";
 
 export class DetailPetsController {
   async handle(request: Request, response: Response) {
-    const detailPetService = new DetailPetsService();
+    const detailPetsService = new DetailPetsService();
 
-    const detailPet = await detailPetService.execute();
+    const detailPets = await detailPetsService.execute();
 
-    return response.json(detailPet);
+    return response.json(detailPets);
   }
 }
