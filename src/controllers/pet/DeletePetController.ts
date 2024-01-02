@@ -3,7 +3,7 @@ import { DeletePetService } from "../../services/pet/DeletePetService";
 
 export class DeletePetController {
   async handle(request: Request, response: Response) {
-    const { pet_id } = request.body;
+    const pet_id = request.params.pet_id as string;
     const user_id = request.user_id;
 
     const deletePetService = new DeletePetService();

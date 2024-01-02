@@ -31,4 +31,8 @@ router.post(
   upload.single("file"),
   new CreatePetController().handle
 );
-router.delete("/delete", isAuthenticated, new DeletePetController().handle);
+router.delete(
+  "/delete/:pet_id",
+  isAuthenticated,
+  new DeletePetController().handle
+);
