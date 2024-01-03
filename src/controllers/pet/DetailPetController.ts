@@ -3,7 +3,7 @@ import { DetailPetService } from "../../services/pet/DetailPetService";
 
 export class DetailPetController {
   async handle(request: Request, response: Response) {
-    const { pet_id } = request.body;
+    const { pet_id } = request.params;
     const user_id = request.user_id;
 
     const detailPetService = new DetailPetService();
