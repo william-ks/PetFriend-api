@@ -6,8 +6,6 @@ export class DetailPetController {
     const { pet_id } = request.params;
     const user_id = request.user_id;
 
-    console.log(pet_id);
-
     const detailPetService = new DetailPetService();
 
     const detailPet = await detailPetService.execute({ pet_id, user_id });
