@@ -26,7 +26,7 @@ router.get("/me", isAuthenticated, new DetailUserController().handle);
 
 //Pet routes
 router.get("/pets", new DetailPetsController().handle);
-router.get("/detailPet/:id", new DetailPetController().handle);
+router.get("/detailPet/:pet_id", new DetailPetController().handle);
 router.get("/mypets", isAuthenticated, new GetPetsController().handle);
 router.get(
   "/pets/:specie",

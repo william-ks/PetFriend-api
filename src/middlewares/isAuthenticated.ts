@@ -27,6 +27,4 @@ export function isAuthenticated(
   } catch (error) {
     return response.status(401).end();
   }
-
-  console.log(authToken);
 }

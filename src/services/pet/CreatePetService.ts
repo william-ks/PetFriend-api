@@ -32,7 +32,7 @@ export class CreatePetService {
       data: {
         picture,
         name,
-        specie,
+        specie: specie.toUpperCase(),
         weight,
         age,
         description,

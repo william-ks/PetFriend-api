@@ -11,7 +11,7 @@ export class GetPetsFilteredService {
         },
       });
 
-      return { pets };
+      return pets;
     }
   }
 }
