@@ -10,6 +10,7 @@ import { CreatePetController } from "./controllers/pet/CreatePetController";
 import { GetPetsController } from "./controllers/pet/GetPetsController";
 import { DeletePetController } from "./controllers/pet/DeletePetController";
 import { DetailPetController } from "./controllers/pet/DetailPetController";
+import { GetPetsFilteredController } from "./controllers/pet/GetPetsFilteredController";
 
 export const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -27,6 +28,11 @@ router.get("/me", isAuthenticated, new DetailUserController().handle);
 router.get("/pets", new DetailPetsController().handle);
 router.get("/detailPet/:id", new DetailPetController().handle);
 router.get("/mypets", isAuthenticated, new GetPetsController().handle);
+router.get(
+  "/pets/:specie",
+  isAuthenticated,
+  new GetPetsFilteredController().handle
+);
 router.post(
   "/pet/new",
   isAuthenticated,
