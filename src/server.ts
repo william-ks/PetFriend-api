@@ -1,25 +1,5 @@
-import express, { Request, Response, NextFunction } from "express";
-import cors from "cors";
-import { router } from "./api/routes";
-import path from "path";
+import app from "./app";
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use("/files", express.static(path.resolve(__dirname, "..", "tmp")));
-app.use(cors());
-
-app.use(router);
-
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof Error) {
-    return res.status(400).json({ error: err.message });
-  }
-
-  return res.status(500).json({
-    status: "error",
-    message: "Internal server error.",
-  });
+app.listen(process.env.PORT, () => {
+  console.log("Server is up");
 });
-
-app.listen(process.env.PORT || 3333, () => console.log("Servidor online"));
