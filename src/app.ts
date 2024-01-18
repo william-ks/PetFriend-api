@@ -19,11 +19,13 @@ class App {
   private middlewares(): void {
     this.express.use(cors());
     this.express.use(express.json());
+    /*
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(
       "/files",
       express.static(path.resolve(__dirname, "..", "tmp"))
     );
+    */
   }
 
   private routes(): void {
