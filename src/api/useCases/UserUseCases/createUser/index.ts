@@ -6,6 +6,6 @@ import { CreateUserService } from "./createUser.service";
 const userRepository = new UserRepository();
 const handlePass = new HandlePass();
 const createUserService = new CreateUserService(userRepository, handlePass);
-const createUserControler = new CreateUserController(createUserService);
+const createUserController = new CreateUserController(createUserService);
 
-export { createUserService, createUserControler };
+export { createUserService, createUserController };

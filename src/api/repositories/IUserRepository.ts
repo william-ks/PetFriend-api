@@ -7,5 +7,6 @@ export interface IFindBy {
 
 export interface IUserRepository {
   findBy(props: IFindBy): Promise<User>;
+  readFull(id: string): Promise<User>;
   save(props: Omit<User, "id">): Promise<void>;
 }

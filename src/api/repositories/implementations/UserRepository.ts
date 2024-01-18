@@ -20,4 +20,17 @@ export class UserRepository implements IUserRepository {
       },
     });
   }
+
+  async readFull(id: string): Promise<User> {
+    const user = await prisma.user.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        pets: true,
+      },
+    });
+
+    return user;
+  }
 }

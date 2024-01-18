@@ -30,7 +30,7 @@ export const isAuth = (req: Request, res: Response, next: NextFunction) => {
     };
   }
 
-  req.user = id;
+  req.user = { id };
 
   next();
 };

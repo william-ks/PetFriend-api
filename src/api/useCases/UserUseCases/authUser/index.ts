@@ -12,6 +12,6 @@ const authUserService = new AuthUserService(
   handlePass,
   handleToken
 );
-const authUserControler = new AuthUserController(authUserService);
+const authUserController = new AuthUserController(authUserService);
 
-export { authUserService, authUserControler };
+export { authUserService, authUserController };
