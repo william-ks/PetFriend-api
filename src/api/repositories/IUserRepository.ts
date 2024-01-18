@@ -2,7 +2,7 @@ import { User } from "../entities/User";
 
 export interface IFindBy {
   key: "email" | "id";
-  value: string | number;
+  value: string;
 }
 
 export interface IUserRepository {
